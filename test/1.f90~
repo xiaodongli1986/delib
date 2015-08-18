@@ -1,0 +1,18 @@
+
+program main
+
+use xdl_tools
+
+implicit none
+
+	integer :: i, j
+	double precision :: z
+	double precision, external :: xdl_zi, xdl_iz
+
+	do i = 1, 10
+		z = xdl_zi(i)
+		print *, i, z
+		j = xdl_iz(z)
+		print *, z, j
+	enddo
+end program main

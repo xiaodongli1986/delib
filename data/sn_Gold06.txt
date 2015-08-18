@@ -1,0 +1,292 @@
+SN90O   0.030   35.90   0.21     Gold \ 
+SN90T   0.040   36.38   0.20      Gold \ 
+SN90af   0.050   36.84   0.22      Gold \ 
+SN91ag   0.014   34.13   0.29      Gold \ 
+SN91U   0.033   35.53   0.21      Gold \ 
+SN91S   0.056   37.31   0.19      Gold \ 
+SN92al   0.014   34.12   0.29      Gold \ 
+SN92bo   0.017   34.70   0.26      Gold \ 
+SN92bc   0.018   34.96   0.25      Gold \ 
+SN92ag   0.026   35.06   0.25      Silver \ 
+SN92P   0.026   35.63   0.22      Gold \ 
+SN92bg   0.036   36.17   0.20      Gold \ 
+SN92bl   0.043   36.52   0.19      Gold \ 
+SN92bh   0.045   36.99   0.18      Gold \ 
+SN92J   0.046   36.35   0.21      Gold \ 
+SN92bk   0.058   37.13   0.19      Gold \ 
+SN92au   0.061   37.31   0.22      Gold \ 
+SN92bs   0.063   37.67   0.19      Gold \ 
+SN92ae   0.075   37.77   0.19      Gold \ 
+SN92bp   0.079   37.94   0.18      Gold \ 
+SN92br   0.088   38.07   0.28      Gold \ 
+SN92aq   0.101   38.70   0.20      Gold \ 
+SN93ae   0.018   34.29   0.25      Gold \ 
+SN93H   0.025   35.09   0.22      Gold \ 
+SN93ah   0.028   35.53   0.22      Gold \ 
+SN93ac   0.049   36.90   0.21      Silver \ 
+SN93ag   0.050   37.07   0.19      Gold \ 
+SN93O   0.052   37.16   0.18      Gold \ 
+SN93B   0.071   37.78   0.19      Gold \ 
+SN94S   0.016   34.50   0.27      Gold \ 
+SN94M   0.024   35.09   0.22      Gold \ 
+SN94Q   0.029   35.70   0.21      Gold \ 
+SN94T   0.036   36.01   0.21      Gold \ 
+SN94C   0.051   36.67   0.17      Silver \ 
+SN94B   0.089   38.50   0.17      Silver \ 
+SN95K   0.478   42.48   0.23      Gold \ 
+SN95ak   0.021   34.70   0.24      Silver \ 
+SN95E   0.011   32.95   0.35      Silver \ 
+SN95bd   0.015   34.07   0.28      Silver \ 
+SN95ac   0.049   36.55   0.20      Gold \ 
+SN95ar   0.465   42.81   0.22      Silver \ 
+SN95as   0.498   43.21   0.24      Silver \ 
+SN95aw   0.400   42.04   0.19      Gold \ 
+SN95ax   0.615   42.85   0.23      Gold \ 
+SN95ay   0.480   42.37   0.20      Gold \ 
+SN95az   0.450   42.13   0.21      Gold \ 
+SN95ba   0.388   42.07   0.19      Gold \ 
+SN95M   0.053   37.17   0.16      Silver \ 
+SN95ae   0.067   37.54   0.34      Silver \ 
+SN95ao   0.300   40.76   0.60      Silver \ 
+SN95ap   0.230   40.44   0.46      Silver \ 
+SN96E   0.425   41.69   0.40      Gold \ 
+SN96H   0.620   43.11   0.28      Gold \ 
+SN96I   0.570   42.80   0.25      Gold \ 
+SN96J   0.300   41.01   0.25      Gold \ 
+SN96K   0.380   42.02   0.22      Gold \ 
+SN96U   0.430   42.33   0.34      Gold \ 
+SN96Z   0.008   32.45   0.45      Silver \ 
+SN96bo   0.016   33.82   0.30      Silver \ 
+SN96bv   0.016   34.21   0.27      Silver \ 
+SN96bk   0.007   32.09   0.53      Silver \ 
+SN96C   0.027   35.90   0.21      Gold \ 
+SN96bl   0.034   36.19   0.20      Gold \ 
+SN96ab   0.124   39.19   0.22      Gold \ 
+SN96cf   0.570   42.77   0.19      Silver \ 
+SN96cg   0.490   42.58   0.19      Silver \ 
+SN96ci   0.495   42.25   0.19      Gold \ 
+SN96cl   0.828   43.96   0.46      Gold \ 
+SN96cm   0.450   42.58   0.19      Silver \ 
+SN96cn   0.430   42.56   0.18      Silver \ 
+SN96V   0.024   35.33   0.26      Silver \ 
+SN96T   0.240   40.68   0.43      Silver \ 
+SN96R   0.160   39.08   0.40      Silver \ 
+SN97eq   0.538   42.66   0.18      Gold \ 
+SN97ek   0.860   44.03   0.30      Gold \ 
+SN97ez   0.778   43.81   0.35      Gold \ 
+SN97as   0.508   42.19   0.35      Gold \ 
+SN97aw   0.440   42.56   0.40      Silver \ 
+SN97bb   0.518   42.83   0.31      Gold \ 
+SN97bh   0.420   41.76   0.23      Silver \ 
+SN97bj   0.334   40.92   0.30      Gold \ 
+SN97ce   0.440   42.07   0.19      Gold \ 
+SN97cj   0.500   42.73   0.20      Gold \ 
+SN97do   0.010   33.72   0.39     Gold  \ 
+SN97E   0.013   34.02   0.31      Gold \ 
+SN97Y   0.016   34.53   0.27      Gold \ 
+SN97cn   0.017   34.71   0.28      Gold \ 
+SN97dg   0.029   36.13   0.21      Gold \ 
+SN97F   0.580   43.04   0.21      Gold \ 
+SN97H   0.526   42.56   0.18      Gold \ 
+SN97I   0.172   39.79   0.18      Gold \ 
+SN97N   0.180   39.98   0.18      Gold \ 
+SN97O   0.374   43.07   0.20      Silver Bad \  
+SN97P   0.472   42.46   0.19      Gold \ 
+SN97Q   0.430   41.99   0.18      Gold \ 
+SN97R   0.657   43.27   0.20      Gold \ 
+SN97ac   0.320   41.45   0.18      Gold \ 
+SN97af   0.579   42.86   0.19      Gold \ 
+SN97ai   0.450   42.10   0.23      Gold \ 
+SN97aj   0.581   42.63   0.19      Gold \ 
+SN97am   0.416   42.10   0.19      Gold \ 
+SN97ap   0.830   43.85   0.19      Gold \ 
+SN97ck   0.970   44.13   0.38      Silver \ 
+SN98ax   0.497   42.77   0.31      Silver \ 
+SN98aw   0.440   42.02   0.19      Silver \ 
+SN98ay   0.638   43.29   0.36      Silver \ 
+SN98ba   0.430   42.36   0.25      Gold \ 
+SN98be   0.644   42.77   0.26      Silver \ 
+SN98as   0.355   41.77   0.28      Silver \ 
+SN98bi   0.740   43.35   0.30      Gold \ 
+SN98ac   0.460   41.81   0.40      Gold \ 
+SN98M   0.630   43.26   0.37      Gold \ 
+SN98J   0.828   43.59   0.61      Gold \ 
+SN98I   0.886   42.91   0.81      Silver \ 
+SN98bp   0.010   33.20   0.38      Gold \ 
+SN98ef   0.017   34.18   0.26      Gold \ 
+SN98V   0.017   34.47   0.26      Gold \ 
+SN98co   0.017   34.62   0.27      Gold \ 
+SN98eg   0.023   35.35   0.22      Gold \ 
+SN98cs   0.032   36.08   0.20      Gold \ 
+SN98dx   0.053   36.95   0.19      Gold \ 
+SN99Q2   0.459   42.67   0.22      Gold \ 
+SN99U2   0.511   42.83   0.21      Gold \ 
+SN99S   0.474   42.81   0.22      Gold \ 
+SN99N   0.537   42.85   0.41      Gold \ 
+SN99M   0.493   40.42   0.60      Silver Bad \ 
+SN99fn   0.477   42.38   0.21      Gold \ 
+SN99ff   0.455   42.29   0.28      Gold \ 
+SN99fj   0.815   43.75   0.33      Gold \ 
+SN99fm   0.949   44.00   0.24      Gold \ 
+SN99fk   1.056   44.35   0.23      Gold \ 
+SN99fw   0.278   41.01   0.41      Gold \ 
+SN99cp   0.010   33.56   0.37      Gold \ 
+SN99dq   0.013   33.73   0.30      Gold \ 
+SN99dk   0.014   34.43   0.29      Gold \ 
+SN99aa   0.015   34.58   0.28      Gold \ 
+SN99X   0.025   35.40   0.22      Gold \ 
+SN99gp   0.026   35.57   0.21      Gold \ 
+SN99cc   0.031   35.84   0.21      Gold \ 
+SN99ef   0.038   36.67   0.19      Gold \ 
+SN99fv   1.199   44.19   0.34      Gold \ 
+SN99fh   0.369   41.62   0.31      Silver \ 
+SN99da   0.012   34.05   0.36      Silver \ 
+SN00ec   0.470   42.76   0.21      Gold \ 
+SN00dz   0.500   42.74   0.24      Gold \ 
+SN00ea   0.420   40.79   0.32      Silver Bad \ 
+SN00eg   0.540   41.96   0.41      Gold \ 
+SN00ee   0.470   42.73   0.23      Gold \ 
+SN00eh   0.490   42.40   0.25      Gold \ 
+SN00fr   0.543   42.67   0.19      Gold \ 
+SN00dk   0.016   34.41   0.27      Gold \ 
+SN00B   0.019   34.59   0.25      Gold \ 
+SN00fa   0.021   35.05   0.23      Gold \ 
+SN00cn   0.023   35.14   0.22      Gold \ 
+SN00bk   0.026   35.35   0.23      Gold \ 
+SN00cf   0.036   36.39   0.19      Gold \ 
+SN00ce   0.016   34.47   0.26      Silver \ 
+SN01iv   0.397   40.89   0.30      Silver Bad \ 
+SN01iw   0.340   40.72   0.26      Silver \ 
+SN01jh   0.884   44.22   0.19      Gold \ 
+SN01hu   0.882   43.89   0.30      Gold \ 
+SN01ix   0.710   43.03   0.32      Silver \ 
+SN01iy   0.570   42.87   0.31      Gold \ 
+SN01jp   0.528   42.76   0.25      Gold \ 
+SN01V   0.016   34.13   0.27      Gold \ 
+SN01fo   0.771   43.12   0.17      Gold \ 
+SN01fs   0.873   43.75   0.38      Silver \ 
+SN01hs   0.832   43.55   0.29      Gold \ 
+SN01hx   0.798   43.88   0.31      Gold \ 
+SN01hy   0.811   43.97   0.35      Gold \ 
+SN01jb   0.698   43.33   0.32      Silver \ 
+SN01jf   0.815   44.09   0.28      Gold \ 
+SN01jm   0.977   43.91   0.26      Gold \ 
+SN01kd   0.935   43.99   0.38      Silver \ 
+SN02P   0.719   43.22   0.26      Silver \ 
+SN02ab   0.422   42.02   0.17      Silver \ 
+SN02ad   0.514   42.39   0.27      Silver \ 
+1997ff   1.755   45.35   0.35        Gold \ 
+2002dc   0.475   42.24   0.20       Gold \ 
+ 2002dd   0.950   43.98   0.34       Gold \ 
+ 2003aj   1.307   44.99   0.31      Silver \ 
+ 2002fx   1.400   45.28   0.81      Silver \ 
+ 2003eq   0.840   43.67   0.21       Gold \ 
+ 2003es   0.954   44.30   0.27      Gold \ 
+ 2003az   1.265   44.64   0.25         Silver \ 
+ 2002kc   0.216   40.33   0.19      Silver \ 
+ 2003eb   0.900   43.64   0.25     Gold \ 
+ 2003XX   0.935   43.97   0.29      Gold \ 
+ 2002hr   0.526   43.08   0.27      Silver \ 
+ 2003bd   0.670   43.19   0.24    Gold \ 
+ 2002kd   0.735   43.14   0.19      Gold \ 
+ 2003be   0.640   43.01   0.25      Gold \ 
+ 2003dy   1.340   44.92   0.31      Gold \ 
+ 2002ki   1.140   44.71   0.29     Gold \ 
+ 2003ak   1.551   45.07   0.32     Silver \ 
+ 2002hp   1.305   44.51   0.30     Gold \ 
+ 2002fw   1.300   45.06   0.20      Gold \ 
+ HST04Pat   0.970   44.67   0.36      Gold \ 
+ HST04Mcg   1.370   45.23   0.25     Gold \ 
+ HST05Fer   1.020   43.99   0.27      Gold \ 
+ HST05Koe   1.230   45.17   0.23     Gold \ 
+ HST05Dic   0.638   42.89   0.18      Silver \ 
+ HST04Gre   1.140   44.44   0.31     Gold \ 
+ HST04Omb   0.975   44.21   0.26      Gold \ 
+ HST05Red   1.190   43.64   0.39    Silver \ 
+ HST05Lan   1.230   44.97   0.20      Gold \ 
+ HST04Tha   0.954   43.85   0.27      Gold \ 
+ HST04Rak   0.740   43.38   0.22      Gold \ 
+ HST05Zwi   0.521   42.05   0.37      Silver \ 
+ HST04Hawk   0.490   42.54   0.24      Silver \ 
+ HST04Kur   0.359   41.23   0.39      Silver \ 
+ HST04Yow   0.460   42.23   0.32      Gold \ 
+ HST04Man   0.854   43.96   0.29      Gold \ 
+ HST05Spo   0.839   43.45   0.20      Gold \ 
+ HST04Eag   1.020   44.52   0.19      Gold \ 
+ HST05Gab   1.120   44.67   0.18      Gold \ 
+ HST05Str   1.010   44.77   0.19     Gold \ 
+ HST04Sas   1.390   44.90   0.19     Gold \ 
+SN88U   0.309   41.43   0.36      Silver \ 
+SN-03D1au   0.504   42.61   0.17      Gold \ 
+SN-03D1aw   0.582   43.07   0.17      Gold \ 
+SN-03D1ax   0.496   42.36   0.17      Gold \ 
+SN-03D1bp   0.346   41.55   0.17      Silver \ 
+SN-03D1cm   0.870   44.28   0.34      Gold \ 
+SN-03D1co   0.679   43.58   0.19      Gold \ 
+SN-03D1ew   0.868   44.06   0.38      Silver \ 
+SN-03D1fc   0.331   41.13   0.17      Gold \ 
+SN-03D1fl   0.688   43.23   0.17      Gold \ 
+SN-03D1fq   0.800   43.67   0.19      Gold \ 
+SN-03D1gt   0.548   43.01   0.18      Silver \ 
+SN-03D3af   0.532   42.78   0.18      Gold \ 
+SN-03D3aw   0.449   42.05   0.17      Gold \ 
+SN-03D3ay   0.371   41.67   0.17      Gold \ 
+SN-03D3ba   0.291   41.18   0.17      Silver \ 
+SN-03D3bh   0.249   40.76   0.17      Gold \ 
+SN-03D3cc   0.463   42.27   0.17      Gold \ 
+SN-03D3cd   0.461   42.22   0.17      Gold \ 
+SN-03D4ag   0.285   40.92   0.17      Gold \ 
+SN-03D4at   0.633   43.32   0.18      Gold \ 
+SN-03D4aud   0.468   42.89   0.18      Silver \ 
+SN-03D4bcd   0.572   43.71   0.21      Silver Bad \ 
+SN-03D4cn   0.818   43.72   0.34      Silver \ 
+SN-03D4cx   0.949   43.69   0.32      Gold \ 
+SN-03D4cy   0.927   44.74   0.41      Silver \ 
+SN-03D4cz   0.695   43.21   0.19      Gold \ 
+SN-03D4dh   0.627   42.93   0.17      Gold \ 
+SN-03D4di   0.905   43.89   0.30      Gold \ 
+SN-03D4dy   0.604   42.70   0.17      Gold \ 
+SN-03D4fd   0.791   43.54   0.18      Gold \ 
+SN-03D4gf   0.581   42.95   0.17      Silver \ 
+SN-03D4gg   0.592   42.75   0.19      Gold \ 
+SN-03D4gl   0.571   42.65   0.18      Gold \ 
+SN-04D1ag   0.557   42.70   0.17      Gold \ 
+SN-04D1aj   0.721   43.39   0.20      Silver \ 
+SN-04D1ak   0.526   42.83   0.17      Silver \ 
+SN-04D2cf   0.369   41.67   0.17      Gold \ 
+SN-04D2fp   0.415   41.96   0.17      Gold \ 
+SN-04D2fs   0.357   41.63   0.17      Gold \ 
+SN-04D2gb   0.430   41.96   0.17      Gold \ 
+SN-04D2gc   0.521   42.62   0.17      Silver \ 
+SN-04D2gp   0.707   43.42   0.21      Gold \ 
+SN-04D2iu   0.691   43.33   0.21      Silver \ 
+SN-04D2ja   0.741   43.61   0.20      Silver \ 
+SN-04D3co   0.620   43.21   0.18      Gold \ 
+SN-04D3cp   0.830   44.60   0.38      Silver \ 
+SN-04D3cy   0.643   43.21   0.18      Gold \ 
+SN-04D3dd   1.010   44.86   0.55      Silver \ 
+SN-04D3df   0.470   42.45   0.17      Gold \ 
+SN-04D3do   0.610   42.98   0.17      Gold \ 
+SN-04D3ez   0.263   40.87   0.17      Gold \ 
+SN-04D3fk   0.358   41.66   0.17      Gold \ 
+SN-04D3fq   0.730   43.47   0.18      Gold \ 
+SN-04D3gt   0.451   42.22   0.17      Silver \ 
+SN-04D3gx   0.910   44.44   0.38      Silver \ 
+SN-04D3hn   0.552   42.65   0.17      Gold \ 
+SN-04D3is   0.710   43.36   0.18      Silver \ 
+SN-04D3ki   0.930   44.61   0.46      Silver \ 
+SN-04D3kr   0.337   41.44   0.17      Gold \ 
+SN-04D3ks   0.752   43.35   0.19      Silver \ 
+SN-04D3lp   0.983   44.13   0.52      Silver \ 
+SN-04D3lu   0.822   43.73   0.27      Gold \ 
+SN-04D3ml   0.950   44.14   0.31      Gold \ 
+SN-04D3nc   0.817   43.84   0.30      Silver \ 
+SN-04D3nh   0.340   41.51   0.17      Gold \ 
+SN-04D3nr   0.960   43.81   0.28      Silver \ 
+SN-04D3ny   0.810   43.88   0.34      Silver \ 
+SN-04D3oe   0.756   43.64   0.17      Gold \ 
+SN-04D4an   0.613   43.15   0.18      Gold \ 
+SN-04D4bk   0.840   43.66   0.25      Silver \ 
+SN-04D4bq   0.550   42.67   0.17      Gold \ 
+SN-04D4dm   0.811   44.13   0.31      Gold \ 
+SN-04D4dw   0.961   44.18   0.33      Gold \
