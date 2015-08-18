@@ -1,5 +1,4 @@
 git pull
-git rm README.md
 git add README.f90
 git add *.sh
 git add *.f90
