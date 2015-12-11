@@ -975,7 +975,9 @@ USE de_model_init
     integer grid_i, i, num_bin
 
     de_chisq_jla = 1.0d10
-    print 'Warning: there may be some mistake in the chisq function of JLA. We can not reproduce the omegam-w contour released by the official team. Please check carefully.'
+    print *, 'Warning: there may be some mistake in the chisq function of JLA. '
+    print *, 'We can not reproduce the omegam-w contour released by the official team.'
+    print *, ' Please check carefully.'
     stop
 
     !Make sure we're ready to actually do this
