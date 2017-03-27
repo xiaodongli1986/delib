@@ -13,16 +13,16 @@ use de_chisqs
 
 implicit none
 
-	double precision :: y
- 	double precision :: omegam, z
- 	integer :: i
+	double precision :: y, y2
+ 	double precision :: omegam, z, a, ez, qz, q_ez_fun, H_residual
+ 	integer :: i, ia
  
  	pr_chisq_info = .false.
  
 !==========================================
 ! LCDM
 !==========================================
-
+if(.true.) then
 	print *
 	print *
 	de_model_lab = de_lcdm_lab
@@ -242,5 +242,76 @@ implicit none
 			print *, 'z<', z, '; union2p1 zc like = ', y
 		enddo
 	endif
+endif
+
+!==========================================
+! de_mauricehde
+!==========================================
+
+	print *
+	print *
+	
+        DO i = 1, 30
+	de_model_lab = de_mauricehde_lab
+	de_CP%Ob0hsq    =  0.02253
+	omegam 		=  0.26+i*0.002!0.284936E+00
+	!de_CP%h		=  0.711833E+00
+	de_CP%h		=  0.71
+	de_CP%alpha	=  0.142125E+01
+	de_CP%beta	=  0.325121E+01  
+	de_CP%Odm0 	=  omegam - de_CP%Ob0hsq/de_CP%h**2.0
+	de_CP%Ok0	= 0
+
+	call de_init()
+
+!	y = de_chisq_g06(.false., .true.)
+!	y = de_chisq_jla()
+!	y = de_chisq_snls3() !+ de_chisq_sdssdr7_old() + de_chisq_wmap7() + de_chisq_h_Riess()
+	y = de_chisq_union2p1() !+ de_chisq_wmap7()
+	y = de_chisq_wmap7()
+	y = de_chisq_planck()
+
+	open(unit=987,file='qz.txt')
+	do ia = 1, 150
+		z=de_zi(ia*100+1)
+		!z = ia * 0.1d0
+		a=1.0/(1.0+z)
+		ez=1.0/de_inv_e(z)
+		qz=de_mauricehde_q(a,ez)
+		q_ez_fun=(1-qz)*ez*ez
+		H_residual=de_CP%Om0/a**3 + de_CP%Or0/a**4 + (1-qz)*ez*ez / 3.0 - ez*ez
+		!print *, 'z / h / q = ', real(z), real(ez), real(de_mauricehde_q(a,ez))
+		write(987,*)  real(z), real(ez), real(qz), real(q_ez_fun), real(H_residual)
+	enddo
+	close(987)
+	
+	de_model_lab = de_lcdm_lab
+	call de_init()
+!	y2 = de_chisq_snls3() !+ de_chisq_sdssdr7_old() + de_chisq_wmap7() + de_chisq_h_Riess()
+	y2 = de_chisq_union2p1() !+ de_chisq_wmap7()
+	y2 = de_chisq_wmap7()
+	y2 = de_chisq_planck()
+
+	open(unit=987,file='qz_lcdm.txt')
+	do ia = 1, 150
+		z=de_zi(ia*100+1)
+		!z = ia * 0.1d0
+		a=1.0/(1.0+z)
+		ez=1.0/de_inv_e(z)
+		qz= -1.0 - (a/ez) * (-3*de_CP%Om0*a**(-4) -4*de_CP%Or0*a**(-5))/(2*ez)
+		q_ez_fun=(1-qz)*ez*ez
+		!print *, 'z / h / q = ', real(z), real(ez), real(qz)
+		write(987,*)  real(z), real(ez), real(qz), real(q_ez_fun)
+	enddo
+	close(987)
+
+	print *, 'omegam /chisqs of HDE/LambdaCDM =', real(omegam), real(y), real(y2)
+	ENDDO
+	write(*,*) ""
+	write(*,*) "====================================="
+	write(*,*) "  Resut of Maurice's HDE:"
+	write(*,*) "     Total chisq (lnlike) = ", y, y/2.0
+	write(*,*) "     Expected chisq = ", 424.911450626633d0
+	write(*,*) "====================================="	
 
 end program main

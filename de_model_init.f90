@@ -28,6 +28,7 @@ USE de_wcdm3
 USE de_srom
 USE de_ICG
 USE de_qz
+USE de_mauricehde
 
 IMPLICIT NONE
 
@@ -43,6 +44,7 @@ IMPLICIT NONE
 	INTEGER, PARAMETER :: de_ICG_lab = 7
 	INTEGER, PARAMETER :: de_qz_lab = 8 ! deceleration parameter as a function of redshift
 	INTEGER, PARAMETER :: de_Rhct_lab = 9 ! H(z) = (1+z)^alpha H0
+	INTEGER, PARAMETER :: de_mauricehde_lab = 10 ! H(z) = (1+z)^alpha H0
 	
 	
 	!model to be used
@@ -96,6 +98,8 @@ IMPLICIT NONE
 			CALL de_ICG_init()
 		ELSEIF(de_model_lab .EQ. de_qz_lab) then
 			CALL de_qz_init()
+		ELSEIF(de_model_lab .EQ. de_mauricehde_lab) then
+			CALL de_mauricehde_init()
 		ELSE
 			WRITE(*,*) "Error! Initializaton of model ", de_model_lab, "not found!"
 			STOP
@@ -133,7 +137,7 @@ IMPLICIT NONE
 		INTEGER :: i, i1, i2, i3
 		DOUBLE PRECISION :: z, z1, z2, z3, f1, f2, f3, Ez
 
-		IF(z > 5.0d5) THEN
+		IF(z > 5.0d8) THEN
 			Ez = sqrt(de_CP%Or0 * (1.0d0+z)**4.0d0)
 			de_intpl_inv_e = 1.0d0 / Ez
 			RETURN
@@ -177,10 +181,11 @@ IMPLICIT NONE
 		ELSEIF(de_model_lab .EQ. de_Rhct_lab) then
 			de_inv_e = 1.0d0 / sqrt((1.0+z)**de_CP%Rhct%alpha)
 		ELSEIF(de_model_lab .EQ. de_hde_lab) THEN
-			de_inv_e = de_hde_inv_e(z)		
+			de_inv_e = de_hde_inv_e(z)	
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_inv_e = de_wcdm3_inv_e(z)
-		ELSEIF(de_model_lab .EQ. de_srom_lab .OR. de_model_lab .EQ. de_ICG_lab .OR. de_model_lab .EQ. de_qz_lab) THEN
+		ELSEIF(de_model_lab .EQ. de_srom_lab .OR. de_model_lab .EQ. de_ICG_lab .OR. de_model_lab .EQ. de_qz_lab &
+		       .OR. de_model_lab .EQ. de_mauricehde_lab) THEN
 			de_inv_e = de_intpl_inv_e(z)
 		ELSE
 			WRITE(*,*) "Error! inv_e(z) of model ", de_model_lab, "not found!"
@@ -207,7 +212,7 @@ IMPLICIT NONE
 			de_rhode = de_hde_rhode(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_rhode = de_wcdm3_rhode(z)
-		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab) then
+		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or. de_mauricehde_lab) then
 			print *, 'ERROR! No rhode(z) available for q(z), Rhct model!'
 			stop
 		ELSE	
@@ -232,7 +237,7 @@ IMPLICIT NONE
 			de_w = de_hde_w(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_w = de_wcdm3_w(z)
-		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab) then
+		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  de_mauricehde_lab) then
 			print *, 'ERROR! No w(z) available for q(z), Rhct model!'
 			stop
 		ELSE

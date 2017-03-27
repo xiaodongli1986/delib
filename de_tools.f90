@@ -9,7 +9,7 @@ USE de_settings
 IMPLICIT NONE
 
 	!number of points used for interpolations in redshift.
-	INTEGER,  PARAMETER		:: de_num_intpl = 6750
+	INTEGER,  PARAMETER		:: de_num_intpl = 10650
 	
 	!If we take the bound in integral of rs to be 1.0d-9,
 	! then 2700  for basenumber 128;
@@ -23,6 +23,7 @@ IMPLICIT NONE
 	!	6750  for basenumber 512 (typical speed: 1.26s / 100p)
 
 	DOUBLE PRECISION,  PARAMETER	:: de_basenumber = 1.0d0 + 1.0d0/512.0d0
+	!DOUBLE PRECISION,  PARAMETER	:: de_basenumber = 1.0d0 + 1.0d0/128.0d0
 	DOUBLE PRECISION,  PARAMETER	:: de_logbasenumber = log(de_basenumber)
 	DOUBLE PRECISION :: de_maxintplz
 

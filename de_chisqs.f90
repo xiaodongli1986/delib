@@ -572,6 +572,7 @@ IMPLICIT NONE
 		lA_ML=301.57d0; R_ML=1.7407d0; Ob0hsq_ML=0.02228d0                                                 !----------------- 
 
 		DVecCMB         = (/lA-lA_ML, R-R_ML, Ob0hsq-Ob0hsq_ML/)
+		!DVecCMB         = (/lA-lA_ML, 0.0d0, 0.0d0 /) !R-R_ML, Ob0hsq-Ob0hsq_ML/)
 		de_chisq_planck = DOT_PRODUCT(DVecCMB,matmul(CovCMB,DVecCMB))
 
 		IF(pr_chisq_info) THEN
