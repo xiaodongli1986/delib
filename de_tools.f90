@@ -25,7 +25,8 @@ IMPLICIT NONE
 	DOUBLE PRECISION,  PARAMETER	:: de_basenumber = 1.0d0 + 1.0d0/512.0d0
 	!DOUBLE PRECISION,  PARAMETER	:: de_basenumber = 1.0d0 + 1.0d0/128.0d0
 	DOUBLE PRECISION,  PARAMETER	:: de_logbasenumber = log(de_basenumber)
-	DOUBLE PRECISION :: de_maxintplz
+	DOUBLE PRECISION :: de_maxintplz, de_minintpla
+	
 
 	
 	!Common used array, saving the interpolating data.
@@ -60,6 +61,7 @@ CONTAINS
 		
 		!Range of the interpolation (maximal redshift)
 		de_maxintplz = de_zdata(de_num_intpl)
+		de_minintpla = 1.0/(1.0+de_maxintplz)
 		WRITE(*,*) " Maximal redshift in interpolating = ", de_maxintplz
 				
 		de_tools_inited = .TRUE.
