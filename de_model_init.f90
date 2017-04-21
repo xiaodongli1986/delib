@@ -64,7 +64,7 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: b1, b2, g1, g2
 		DOUBLE PRECISION :: z, x, lnH, F ! for test
 
-		IF(de_tools_inited .EQ. .FALSE.) THEN
+		IF(.not. de_tools_inited) THEN
 			CALL de_tools_init()
 			de_tools_inited = .TRUE.
 		ENDIF
@@ -212,7 +212,8 @@ IMPLICIT NONE
 			de_rhode = de_hde_rhode(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_rhode = de_wcdm3_rhode(z)
-		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or. de_mauricehde_lab) then
+		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab &
+			.or. de_model_lab .EQ. de_mauricehde_lab) then
 			print *, 'ERROR! No rhode(z) available for q(z), Rhct model!'
 			stop
 		ELSE	
@@ -237,7 +238,8 @@ IMPLICIT NONE
 			de_w = de_hde_w(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_w = de_wcdm3_w(z)
-		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  de_mauricehde_lab) then
+		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  &
+			de_model_lab .EQ. de_mauricehde_lab) then
 			print *, 'ERROR! No w(z) available for q(z), Rhct model!'
 			stop
 		ELSE

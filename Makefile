@@ -1,6 +1,7 @@
 lib = lib/libde.a
 OBJS = de_settings.o de_tools.o de_types.o de_hde.o de_wcdm3.o de_model_init.o de_chisqs_JLA.o de_chisqs.o de_srom.o de_ICG.o de_qz.o de_mauricehde.o
-F90C = ifort
+#OBJS = de_settings.o de_tools.o de_types.o de_hde.o de_wcdm3.o de_model_init.o de_srom.o de_ICG.o de_qz.o de_mauricehde.o
+F90C = gfortran #ifort
 F90FLAGS = #-mkl_lp64th
 
 default: $(lib)

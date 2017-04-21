@@ -102,12 +102,14 @@ IMPLICIT NONE
 !!! Union2.1
 !Union2.1 data
 	INTEGER, PRIVATE, PARAMETER   	:: union2p1_num  =  580
-	DOUBLE PRECISION, PRIVATE 	:: union2p1_z(union2p1_num), union2p1_moduli(union2p1_num), union2p1_modulierr(union2p1_num), union2p1_plow(union2p1_num), union2p1_sumninv
+	DOUBLE PRECISION, PRIVATE 	:: union2p1_z(union2p1_num), union2p1_moduli(union2p1_num), &
+		union2p1_modulierr(union2p1_num), union2p1_plow(union2p1_num), union2p1_sumninv
 	DOUBLE PRECISION, PRIVATE 	:: union2p1_Ninv(union2p1_num,union2p1_Num)
 
 !Union2 data
 	INTEGER, PRIVATE, PARAMETER   	:: union2_num  =  558
-	DOUBLE PRECISION, PRIVATE 	:: union2_z(union2_num), union2_moduli(union2_num), union2_modulierr(union2_num), union2_plow(union2_num), union2_sumninv
+	DOUBLE PRECISION, PRIVATE 	:: union2_z(union2_num), union2_moduli(union2_num), &
+		union2_modulierr(union2_num), union2_plow(union2_num), union2_sumninv
 	DOUBLE PRECISION, PRIVATE 	:: union2_Ninv(union2_num,union2_Num)
 
 
@@ -140,7 +142,9 @@ IMPLICIT NONE
 		
 		CALL de_Init()
 
-		de_chisq_all =  de_chisq_union2p1() + de_chisq_snls3()  + de_chisq_wmap7() + de_chisq_h_Carnegie() + de_chisq_h_Riess() + de_chisq_bao_ver1() + de_chisq_bao_ver2()
+		de_chisq_all =  de_chisq_union2p1() + de_chisq_snls3() &
+			 + de_chisq_wmap7() + de_chisq_h_Carnegie() + de_chisq_h_Riess() &
+			+ de_chisq_bao_ver1() + de_chisq_bao_ver2()
 		!+ de_chisq_union2p1() + chisq_bao_old()
 		If(de_chisq_all .ge. logzero) de_chisq_all = logzero
 		count_chisq = count_chisq + 1

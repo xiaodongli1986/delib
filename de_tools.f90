@@ -292,15 +292,24 @@ CONTAINS
 		CHARACTER(LEN=de_char_len) :: file_name
 		DOUBLE PRECISION :: output_data(:,:)
 		INTEGER :: d1, d2 
-		INTEGER  :: i
+		INTEGER  :: i,j
+		CHARACTER(LEN=de_char_len) :: tmpstr1, tmpstr2
 
 		d1 = SIZE(output_data, 1)
 		d2 = SIZE(output_data, 2)
 
 		OPEN(UNIT=9873,FILE=file_name,ERR=22)
 
+!		DO I=1, d1
+!			WRITE(9873,'(<d2>(e14.7,2x))',ERR=33) output_data(i,1:d2)
+!		ENDDO
 		DO I=1, d1
-			WRITE(9873,'(<d2>(e14.7,2x))',ERR=33) output_data(i,1:d2)
+			tmpstr1 = ''
+			DO j=1, d2
+				WRITE(tmpstr2,'(e14.7)',ERR=33) output_data(i,j)
+				tmpstr1 = trim(adjustl(tmpstr1))//' '//trim(adjustl(tmpstr2))
+			ENDDO
+			WRITE(9873,'(A)',ERR=33) trim(adjustl(tmpstr2))
 		ENDDO
 
 		CLOSE(9873)

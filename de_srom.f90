@@ -30,7 +30,7 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: x, F, a, r0
 		a = exp(x) ! scale fator as function of x=ln a
 		r0 = de_CP%Odm0/(1.0-de_CP%Odm0-de_CP%Ob0-de_CP%Or0)
-		de_srom_rhobtorhox = de_CP%Ob0/de_CP%Odm0*(a**-3.0)*r0*exp(F)
+		de_srom_rhobtorhox = de_CP%Ob0/de_CP%Odm0*(a**(-3.0))*r0*exp(F)
 	END FUNCTION de_srom_rhobtorhox
 	
 	!!! TBC
@@ -38,7 +38,8 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: x, lnH, F, a, r0, y
 		a = exp(x) ! scale fator as function of x=ln a
 		r0 = de_CP%Odm0/(1.0-de_CP%Odm0-de_CP%Ob0-de_CP%Or0)
-		de_srom_dlnHdx = (de_CP%srom%w0+de_CP%srom%w1*(1.0-a)) / (1.0+r0*a**(-de_CP%srom%xi)+ (1.0d0+de_CP%Or0/de_CP%Ob0/a) * de_srom_rhobtorhox(x,F))
+		de_srom_dlnHdx = (de_CP%srom%w0+de_CP%srom%w1*(1.0-a)) / &
+                (1.0+r0*a**(-de_CP%srom%xi)+ (1.0d0+de_CP%Or0/de_CP%Ob0/a) * de_srom_rhobtorhox(x,F))
 		
 		y =  (1.0+r0*a**(-de_CP%srom%xi)) * (de_CP%Odm0/de_CP%Or0) * (a**4.0d0) / r0 * Exp(-F)
 		y = (1.0/3.0d0) / (1.0+de_CP%Ob0/de_CP%Or0*a+y)
