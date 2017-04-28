@@ -195,7 +195,7 @@ IMPLICIT NONE
 		INTEGER :: i, num_bin
 		DOUBLE PRECISION :: z,mu,dmu,lumdist,muth,diffmu,dmufac, A, B, C
 
-		IF(g06_read.eq..FALSE.) then
+		IF(g06_read.eqv..FALSE.) then
 			CALL g06_init()
 		ENDIF
 
@@ -365,8 +365,8 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: amarg_A, amarg_B, amarg_C, amarg_D, amarg_E, amarg_F, tempG
 		INTEGER :: i, num_bin, STATUS
 
-		IF(snls_read .EQ. .FALSE.)	CALL read_snls_dataset()
-		IF(snls_prepped .EQ. .FALSE. )  CALL snls_prep()
+		IF(snls_read .EQV. .FALSE.)	CALL read_snls_dataset()
+		IF(snls_prepped .EQV. .FALSE. )  CALL snls_prep()
 
 		alpha = de_CP%alpha
 		beta  = de_CP%beta
@@ -462,7 +462,7 @@ IMPLICIT NONE
 		! Local
 		INTEGER :: i, num_bin
 		
-		IF(union2p1_inited .EQ. .FALSE.) THEN
+		IF(union2p1_inited .EQV. .FALSE.) THEN
 			CALL union2p1_init()
 			WRITE(*,*) "Union2.1 read in completed"
 			union2p1_inited = .TRUE.
@@ -492,7 +492,7 @@ IMPLICIT NONE
 		! Local
 		INTEGER :: i, num_bin
 		
-		IF(union2p1_inited .EQ. .FALSE.) THEN
+		IF(union2p1_inited .EQV. .FALSE.) THEN
 			CALL union2p1_init()
 			WRITE(*,*) "Union2.1 read in completed"
 			union2p1_inited = .TRUE.
@@ -800,14 +800,24 @@ IMPLICIT NONE
 	DOUBLE PRECISION FUNCTION de_chisq_bao_ver1()
 		DOUBLE PRECISION :: z1, z2, z3, z4, z5, z6
 		DOUBLE PRECISION :: p1(2), p2(3)
- 		DOUBLE PRECISION :: cov1(2,2)=(/ 30124.0d0,-17227.0d0, &
-                                   -17227.0d0,86977.0d0 /)
-		DOUBLE PRECISION :: cov2(3,3)=(/ 1040.3d0,-807.5d0,336.8d0, &
-                                      -807.5d0,3720.3d0,-1551.9d0, &
-                                       336.8d0,-1551.9d0,2914.9d0 /)
+ 		DOUBLE PRECISION :: cov1(2,2)
+		DOUBLE PRECISION :: cov2(3,3)
 		DOUBLE PRECISION :: chisqSDSS, chisqWiggleZ, chisq6dFGS
 		INTEGER :: i
 		
+		cov1(1,1) = 30124.0d0
+		cov1(1,2) = -17227.0d0
+		cov1(2,1) = -17227.0d0
+		cov1(2,2) = 86977.0d0
+		cov2(1,1) = 1040.3d0
+		cov2(1,2) = -807.5d0
+		cov2(1,3) = 336.8d0
+		cov2(2,1) = -807.5d0
+		cov2(2,2) = 3720.3d0
+		cov2(2,3) = -1551.9d0
+		cov2(3,1) = 336.8d0
+		cov2(3,2) = -1551.9d0
+		cov2(3,3) = 2914.9d0
 		z1 = 0.2d0
 		z2 = 0.35d0
 		z3 = 0.106d0

@@ -263,7 +263,8 @@ CONTAINS
   !-----------------------------------------------------------
 	SUBROUTINE de_count_line_number (file_name, line_number)
 		INTEGER :: line_number
-		CHARACTER(LEN=de_char_len) :: file_name, inline
+		CHARACTER(len=*) :: file_name
+		CHARACTER(len=de_char_len) :: inline
     
 		OPEN(UNIT=1456,FILE=file_name,ERR=2)
     

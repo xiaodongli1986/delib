@@ -263,7 +263,7 @@ IMPLICIT NONE
 		z1 = 0.0d0
 		z2 = 0.5d0
 		de_Inte = 0.0d0
-		N  = 32
+		N  = 128
 		DO WHILE(z2<zright)
 			de_Inte = de_Inte + de_Simpson(de_inv_e,z1,z2,N)
 			z1 = z2
