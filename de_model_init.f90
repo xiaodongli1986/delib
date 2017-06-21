@@ -45,6 +45,7 @@ IMPLICIT NONE
 	INTEGER, PARAMETER :: de_qz_lab = 8 ! deceleration parameter as a function of redshift
 	INTEGER, PARAMETER :: de_Rhct_lab = 9 ! H(z) = (1+z)^alpha H0
 	INTEGER, PARAMETER :: de_mauricehde_lab = 10 ! H(z) = (1+z)^alpha H0
+	INTEGER, PARAMETER :: de_wz_binned_lab = 11 ! binned w within 0<z<zmax; at z>zmax have w = whigz
 	
 	
 	!model to be used
@@ -85,7 +86,9 @@ IMPLICIT NONE
 		IF(de_model_lab .EQ. de_lcdm_lab .or. &
 			de_model_lab .EQ. de_wcdm_lab .or.&
 			de_model_lab .EQ. de_cpl_lab .or. &
-			de_model_lab .EQ. de_Rhct_lab) THEN
+			de_model_lab .EQ. de_Rhct_lab .or. &
+			de_model_lab .EQ. de_wz_binned_lab
+			) THEN
 			CONTINUE
 			!No intialization need to be done
 		ELSEIF(de_model_lab .EQ. de_hde_lab) THEN
@@ -184,6 +187,11 @@ IMPLICIT NONE
 			de_inv_e = de_hde_inv_e(z)	
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_inv_e = de_wcdm3_inv_e(z)
+		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+			de_inv_e = 1.0d0 / sqrt(de_CP%Om0*(1.0+z)**3.0  &
+				+ de_CP%Ok0*(1.0+z)**2.0 &
+				+ de_CP%Or0*(1.0+z)**4.0 &
+				+ de_CP%Ode0*de_rhode(z))			
 		ELSEIF(de_model_lab .EQ. de_srom_lab .OR. de_model_lab .EQ. de_ICG_lab .OR. de_model_lab .EQ. de_qz_lab &
 		       .OR. de_model_lab .EQ. de_mauricehde_lab) THEN
 			de_inv_e = de_intpl_inv_e(z)
@@ -212,6 +220,8 @@ IMPLICIT NONE
 			de_rhode = de_hde_rhode(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_rhode = de_wcdm3_rhode(z)
+		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+			de_rhode = de_fde(z)
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab &
 			.or. de_model_lab .EQ. de_mauricehde_lab) then
 			print *, 'ERROR! No rhode(z) available for q(z), Rhct model!'
@@ -227,6 +237,7 @@ IMPLICIT NONE
   !------------------------------------------	
 	DOUBLE PRECISION FUNCTION de_w(z)
 		DOUBLE PRECISION :: z
+		INTEGER :: iz
 
 		IF(de_model_lab .EQ. de_lcdm_lab) THEN
 			de_w = 1.0d0
@@ -238,6 +249,15 @@ IMPLICIT NONE
 			de_w = de_hde_w(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_w = de_wcdm3_w(z)
+		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+			if(z .ge. de_CP%wz_binned%zmax) THEN
+				de_w = de_CP%wz_binned%whighz
+			else
+				iz = ceiling(z / de_CP%wz_binned%zmax * (de_CP%wz_binned%nbins+0.0))
+				iz = min(iz,de_CP%wz_binned%nbins)
+				iz = max(iz,1)
+				de_w = de_CP%wz_binned%wzs(iz)
+			endif
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  &
 			de_model_lab .EQ. de_mauricehde_lab) then
 			print *, 'ERROR! No w(z) available for q(z), Rhct model!'
@@ -340,6 +360,23 @@ IMPLICIT NONE
 			de_fk = distance
 		ENDIF
 	END FUNCTION de_fk
+	
+	
+	
+  !------------------------------------------
+  ! fde = exp( 3.0 * \int_0^z (1+w)/(1+z) dz
+  !------------------------------------------
+  	DOUBLE PRECISION FUNCTION de_fde_tobeint(z)
+  		DOUBLE PRECISION :: z
+  		de_fde_tobeint = (de_w(z) + 1.0d0) / (1.0d0+z)
+  	end FUNCTION de_fde_tobeint
+	DOUBLE PRECISION FUNCTION de_fde(z)
+		DOUBLE PRECISION :: z
+		de_fde = de_Simpson(de_fde_tobeint,0.0d0,z,ceiling(z*256))
+		de_fde = dexp(3.0d0 * de_fde)
+	END FUNCTION de_fde
+		
+	
 	
   !----------------------------------------------------------------
   ! Angular Diameter Distance

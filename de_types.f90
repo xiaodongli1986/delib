@@ -19,6 +19,14 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: w1, w2, w3
 	END TYPE
 	
+	TYPE :: wz_binned_para
+		DOUBLE PRECISION :: zmax = 1.5d0
+		INTEGER :: nbins = 30 ! should be nbins < 1000
+		DOUBLE PRECISION :: wzs(1000)
+		DOUBLE PRECISION :: whighz = -1.0d0
+	END TYPE	
+	
+	
 	TYPE :: wcdm_para
 		DOUBLE PRECISION :: w
 	END TYPE
@@ -70,6 +78,8 @@ IMPLICIT NONE
 		TYPE(qz_para) :: qz
 		! Rhct model
 		TYPE(Rhct_para) :: Rhct
+		
+		TYPE(wz_binned_para) :: wz_binned
 
 
 		!derived parameters

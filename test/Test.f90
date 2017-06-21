@@ -19,6 +19,70 @@ implicit none
  
  	pr_chisq_info = .false.
  
+ !#############################################
+! Test of de_fde
+if(.false.) then
+        de_model_lab = de_CPL_lab
+        de_CP%Ob0hsq    =  0.02253
+        omegam = 0.264624E+00
+        de_CP%CPL%w0 =  -0.106659E+01
+        de_CP%CPL%wa =  -0.911151E-01
+        de_CP%h         =  0.724149E+00
+        de_CP%alpha     =  0.142358E+01
+        de_CP%beta      =  0.325629E+01
+        de_CP%Odm0      =  omegam - de_CP%Ob0hsq/de_CP%h**2.0
+        de_CP%Ok0       = 0
+
+        call de_init()
+	do i = 1, 10
+		z = i*0.1d0
+		y = (1.0+z)**(3.0*(1.0+de_CP%CPL%w0+de_CP%CPL%wa)) * exp(-3.0*z*de_CP%CPL%wa/(1.0d0+z))
+		y2 = de_fde(z)
+		print *, real(z), y, y2
+	enddo
+	stop
+endif
+
+ !#############################################
+! Test of de_wz_binned
+if(.true.) then
+
+        de_CP%Ob0hsq    =  0.02253
+        
+        omegam = 0.264624E+00
+        de_CP%CPL%w0 =  -0.106659E+01
+        de_CP%CPL%wa =  -0.911151E-01
+        de_CP%h         =  0.724149E+00
+        de_CP%alpha     =  0.142358E+01
+        de_CP%beta      =  0.325629E+01
+        de_CP%Odm0      =  omegam - de_CP%Ob0hsq/de_CP%h**2.0
+        de_CP%Ok0       = 0
+
+	de_CP%wz_binned%nbins = 30
+	de_CP%wz_binned%whighz = -1.0
+	de_CP%wz_binned%zmax = 1.5
+	y = de_CP%wz_binned%zmax / dble(de_CP%wz_binned%nbins)
+	do i = 1, de_CP%wz_binned%nbins
+		z = (i-0.5) * y
+		de_CP%wz_binned%wzs(i) = de_CP%CPL%w0 + de_CP%CPL%wa* z / (1+z)
+	enddo
+        
+	do i = 1, 10
+		z = i*0.1d0
+	        de_model_lab = de_CPL_lab
+	        call de_init()
+		y = de_inv_e(z)
+	        de_model_lab = de_wz_binned_lab
+	        call de_init()
+		y2 = de_inv_e(z)
+		print *, real(z), y, y2
+	enddo
+
+	
+	
+	stop
+endif
+ 
 !==========================================
 ! LCDM
 !==========================================
@@ -110,7 +174,8 @@ if(.true.) then
 	de_CP%Ok0	= 0
 
 	call de_init()
-	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() + de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
+	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() &
+		+ de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
 	
 	write(*,*) ""
 	write(*,*) "====================================="
@@ -140,7 +205,8 @@ if(.true.) then
 
 	de_model_lab = de_srom_lab
 	call de_init()
-	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() + de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
+	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() &
+		+ de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
 
 	write(*,*) ""
 	write(*,*) "====================================="
@@ -180,7 +246,8 @@ if(.true.) then
 	de_CP%ICG%A =   (1.0-de_CP%Odm0-de_CP%Ob0hsq/de_CP%h**2.0 - de_CP%Or0)**2.0	
 	call de_init()
 	
-	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() + de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
+	y = de_chisq_snls3() + de_chisq_impwig()+de_chisq_dr11()+de_chisq_6dfGS() &
+		+ de_chisq_wmap9() + de_chisq_planck() + de_chisq_h_Riess()
 
 	write(*,*) "====================================="
 	write(*,*) "  Resut of ICG:"
@@ -244,6 +311,8 @@ if(.true.) then
 	endif
 endif
 
+
+       
 !==========================================
 ! de_mauricehde
 !==========================================
@@ -313,5 +382,7 @@ endif
 	write(*,*) "     Total chisq (lnlike) = ", y, y/2.0
 	write(*,*) "     Expected chisq = ", 424.911450626633d0
 	write(*,*) "====================================="	
+
+
 
 end program main

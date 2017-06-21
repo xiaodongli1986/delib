@@ -1,4 +1,4 @@
 #!/bin/bash
-ifort Test.f90 $delm -mkl
-./a.out
+gfortran Test.f90 $delm
+#./a.out
 
