@@ -47,6 +47,7 @@ IMPLICIT NONE
 	INTEGER, PARAMETER :: de_mauricehde_lab = 10 ! H(z) = (1+z)^alpha H0
 	INTEGER, PARAMETER :: de_wz_binned_lab = 11 ! binned w within 0<z<zmax; at z>zmax have w = whigz
 	
+	INTEGER, PARAMETER :: de_inte_numbasebin = 256
 	
 	!model to be used
 !	INTEGER :: de_model_lab = de_hde_lab
@@ -86,11 +87,14 @@ IMPLICIT NONE
 		IF(de_model_lab .EQ. de_lcdm_lab .or. &
 			de_model_lab .EQ. de_wcdm_lab .or.&
 			de_model_lab .EQ. de_cpl_lab .or. &
-			de_model_lab .EQ. de_Rhct_lab .or. &
-			de_model_lab .EQ. de_wz_binned_lab
+			de_model_lab .EQ. de_Rhct_lab &
 			) THEN
 			CONTINUE
 			!No intialization need to be done
+		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+			do i = 1, de_num_intpl
+				de_rhodezdata(i) = de_fde(de_zi(i))
+			enddo
 		ELSEIF(de_model_lab .EQ. de_hde_lab) THEN
 			CALL de_hde_init()
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
@@ -221,7 +225,7 @@ IMPLICIT NONE
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_rhode = de_wcdm3_rhode(z)
 		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
-			de_rhode = de_fde(z)
+			de_rhode = de_get_rhodez(z)
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab &
 			.or. de_model_lab .EQ. de_mauricehde_lab) then
 			print *, 'ERROR! No rhode(z) available for q(z), Rhct model!'
@@ -283,7 +287,7 @@ IMPLICIT NONE
 		z1 = 0.0d0
 		z2 = 0.5d0
 		de_Inte = 0.0d0
-		N  = 128
+		N  = de_inte_numbasebin
 		DO WHILE(z2<zright)
 			de_Inte = de_Inte + de_Simpson(de_inv_e,z1,z2,N)
 			z1 = z2
@@ -370,9 +374,21 @@ IMPLICIT NONE
   		DOUBLE PRECISION :: z
   		de_fde_tobeint = (de_w(z) + 1.0d0) / (1.0d0+z)
   	end FUNCTION de_fde_tobeint
-	DOUBLE PRECISION FUNCTION de_fde(z)
-		DOUBLE PRECISION :: z
-		de_fde = de_Simpson(de_fde_tobeint,0.0d0,z,ceiling(z*256))
+	DOUBLE PRECISION FUNCTION de_fde(zright)
+		DOUBLE PRECISION :: zright
+		DOUBLE PRECISION :: z1,z2,f1,f2
+		DOUBLE PRECISION :: aright
+		INTEGER :: i, N
+		z1 = 0.0d0
+		z2 = 0.5d0
+		de_fde = 0.0d0
+		N  = de_inte_numbasebin
+		DO WHILE(z2<zright)
+			de_fde = de_fde + de_Simpson(de_fde_tobeint,z1,z2,N)
+			z1 = z2
+			z2 = z2*2.d0
+		ENDDO
+		de_fde = de_fde + de_Simpson(de_fde_tobeint,z1,zright,N)
 		de_fde = dexp(3.0d0 * de_fde)
 	END FUNCTION de_fde
 		

@@ -15,7 +15,7 @@ implicit none
 
 	double precision :: y, y2
  	double precision :: omegam, z, a, ez, qz, q_ez_fun, H_residual
- 	integer :: i, ia
+ 	integer :: i,j,k, ia
  
  	pr_chisq_info = .false.
  
@@ -58,7 +58,7 @@ if(.true.) then
         de_CP%Odm0      =  omegam - de_CP%Ob0hsq/de_CP%h**2.0
         de_CP%Ok0       = 0
 
-	de_CP%wz_binned%nbins = 30
+	de_CP%wz_binned%nbins = 1000
 	de_CP%wz_binned%whighz = -1.0
 	de_CP%wz_binned%zmax = 1.5
 	y = de_CP%wz_binned%zmax / dble(de_CP%wz_binned%nbins)
@@ -72,9 +72,15 @@ if(.true.) then
 	        de_model_lab = de_CPL_lab
 	        call de_init()
 		y = de_inv_e(z)
+		do j = 1, 100000
+			y = de_inv_e(z)
+		enddo
 	        de_model_lab = de_wz_binned_lab
 	        call de_init()
 		y2 = de_inv_e(z)
+		do j = 1, 100000
+			y2 = de_inv_e(z)
+		enddo
 		print *, real(z), y, y2
 	enddo
 

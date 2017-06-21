@@ -39,6 +39,8 @@ IMPLICIT NONE
 	DOUBLE PRECISION :: de_odezdata(de_num_intpl)
 	! Array for dark energy equation of state
 	DOUBLE PRECISION :: de_wzdata(de_num_intpl)
+	! Array for rhode (z) / rho(z=0)
+	DOUBLE PRECISION :: de_rhodezdata(de_num_intpl)
 	
 	LOGICAL :: de_tools_inited = .FALSE.
 	
@@ -183,6 +185,33 @@ CONTAINS
 
 		de_get_wz = de_intpl_vl(z, z1, f1, z2, f2, z3, f3)
 	END FUNCTION de_get_wz
+	
+  !------------------------------------------
+  ! get the value of w(z) from wzdata
+  !------------------------------------------
+	DOUBLE PRECISION FUNCTION de_get_rhodez(z)    
+		INTEGER :: i, i1, i2, i3
+		DOUBLE PRECISION :: z, z1, z2, z3, f1, f2, f3
+
+		i = de_iz(z)
+
+		IF(i < 2) i=2
+		IF(i > de_num_intpl - 1) i = de_num_intpl -1
+
+		i1 = i-1 
+		i2 = i 
+		i3 = i+1
+		
+		z1 = de_zdata(i1)
+		z2 = de_zdata(i2)
+		z3 = de_zdata(i3)
+		
+		f1 = de_rhodezdata(i1) 
+		f2 = de_rhodezdata(i2)
+		f3 = de_rhodezdata(i3)
+
+		de_get_rhodez = de_intpl_vl(z, z1, f1, z2, f2, z3, f3)
+	END FUNCTION de_get_rhodez
 
 
   !---------------------------------------------------------------
