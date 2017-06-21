@@ -9,7 +9,7 @@ To install it, firstly modify the path for data
 
 	CHARACTER(len=de_char_len), PARAMETER :: de_data_path = ...
 		
-defined in the file 'de_chisqs.f90'. Then, compile the codes using
+defined in the file 'de_settings.f90'. Then, compile the codes using
 
 	make
 	
