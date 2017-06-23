@@ -45,7 +45,7 @@ IMPLICIT NONE
 	INTEGER, PARAMETER :: de_qz_lab = 8 ! deceleration parameter as a function of redshift
 	INTEGER, PARAMETER :: de_Rhct_lab = 9 ! H(z) = (1+z)^alpha H0
 	INTEGER, PARAMETER :: de_mauricehde_lab = 10 ! H(z) = (1+z)^alpha H0
-	INTEGER, PARAMETER :: de_wz_binned_lab = 11 ! binned w within 0<z<zmax; at z>zmax have w = whigz
+	INTEGER, PARAMETER :: de_w_binned_lab = 11 ! binned w within 0<z<zmax; at z>zmax have w = whigz
 	
 	INTEGER, PARAMETER :: de_inte_numbasebin = 256
 	
@@ -63,7 +63,7 @@ IMPLICIT NONE
   !------------------------------------------
 	SUBROUTINE de_init()
 		INTEGER :: i
-		DOUBLE PRECISION :: b1, b2, g1, g2
+		DOUBLE PRECISION :: b1, b2, g1, g2, z1,z2
 		DOUBLE PRECISION :: z, x, lnH, F ! for test
 
 		IF(.not. de_tools_inited) THEN
@@ -91,9 +91,14 @@ IMPLICIT NONE
 			) THEN
 			CONTINUE
 			!No intialization need to be done
-		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+		ELSEIF(de_model_lab .EQ. de_w_binned_lab) THEN
+			de_rhodezdata(1) = 0.0; z2=de_zi(1)
+			do i = 2, de_num_intpl
+				z1 = z2; z2 = de_zi(i)
+				de_rhodezdata(i) = de_rhodezdata(i-1)+de_Simpson(de_fde_tobeint,z1,z2,1)
+			enddo
 			do i = 1, de_num_intpl
-				de_rhodezdata(i) = de_fde(de_zi(i))
+				de_rhodezdata(i) = dexp(3.0d0 *de_rhodezdata(i))
 			enddo
 		ELSEIF(de_model_lab .EQ. de_hde_lab) THEN
 			CALL de_hde_init()
@@ -191,7 +196,7 @@ IMPLICIT NONE
 			de_inv_e = de_hde_inv_e(z)	
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_inv_e = de_wcdm3_inv_e(z)
-		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+		ELSEIF(de_model_lab .EQ. de_w_binned_lab) THEN
 			de_inv_e = 1.0d0 / sqrt(de_CP%Om0*(1.0+z)**3.0  &
 				+ de_CP%Ok0*(1.0+z)**2.0 &
 				+ de_CP%Or0*(1.0+z)**4.0 &
@@ -224,7 +229,7 @@ IMPLICIT NONE
 			de_rhode = de_hde_rhode(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_rhode = de_wcdm3_rhode(z)
-		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
+		ELSEIF(de_model_lab .EQ. de_w_binned_lab) THEN
 			de_rhode = de_get_rhodez(z)
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab &
 			.or. de_model_lab .EQ. de_mauricehde_lab) then
@@ -240,8 +245,8 @@ IMPLICIT NONE
   ! w_hde(z)
   !------------------------------------------	
 	DOUBLE PRECISION FUNCTION de_w(z)
-		DOUBLE PRECISION :: z
-		INTEGER :: iz
+		DOUBLE PRECISION :: z, amin,a
+		INTEGER :: iz, ia
 
 		IF(de_model_lab .EQ. de_lcdm_lab) THEN
 			de_w = 1.0d0
@@ -253,14 +258,28 @@ IMPLICIT NONE
 			de_w = de_hde_w(z)
 		ELSEIF(de_model_lab .EQ. de_wcdm3_lab) THEN
 			de_w = de_wcdm3_w(z)
-		ELSEIF(de_model_lab .EQ. de_wz_binned_lab) THEN
-			if(z .ge. de_CP%wz_binned%zmax) THEN
-				de_w = de_CP%wz_binned%whighz
-			else
-				iz = ceiling(z / de_CP%wz_binned%zmax * (de_CP%wz_binned%nbins+0.0))
-				iz = min(iz,de_CP%wz_binned%nbins)
-				iz = max(iz,1)
-				de_w = de_CP%wz_binned%wzs(iz)
+		ELSEIF(de_model_lab .EQ. de_w_binned_lab) THEN
+			if(de_CP%w_binned%binnedmethod .EQ. de_zbinned_type) then
+				if(z .ge. de_CP%w_binned%zmax) THEN
+					de_w = de_CP%w_binned%whighz
+				else
+					iz = ceiling(z / de_CP%w_binned%zmax * (de_CP%w_binned%nbins+0.0))
+					iz = min(iz,de_CP%w_binned%nbins)
+					iz = max(iz,1)
+					de_w = de_CP%w_binned%ws(iz)
+				endif
+			elseif(de_CP%w_binned%binnedmethod .EQ. de_abinned_type) then
+				if(z .ge. de_CP%w_binned%zmax) THEN
+					de_w = de_CP%w_binned%whighz
+				else
+					a = 1.0/(1.0+z)
+					amin = 1.0/(1.0d0+de_CP%w_binned%zmax)
+					ia = ceiling((1.0-a)/(1.0-amin)*de_CP%w_binned%nbins)
+					ia = min(ia,de_CP%w_binned%nbins)
+					ia = max(ia,1)
+					de_w = de_CP%w_binned%ws(ia)
+					!print *, z, a,amin, ia, de_w
+				endif
 			endif
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  &
 			de_model_lab .EQ. de_mauricehde_lab) then

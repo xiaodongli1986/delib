@@ -14,7 +14,7 @@ use de_chisqs
 implicit none
 
 	double precision :: y, y2
- 	double precision :: omegam, z, a, ez, qz, q_ez_fun, H_residual
+ 	double precision :: omegam, z, a, ez, qz, q_ez_fun, H_residual, amin
  	integer :: i,j,k, ia
  
  	pr_chisq_info = .false.
@@ -44,7 +44,7 @@ if(.false.) then
 endif
 
  !#############################################
-! Test of de_wz_binned
+! Test of de_w_binned
 if(.true.) then
 
         de_CP%Ob0hsq    =  0.02253
@@ -58,13 +58,20 @@ if(.true.) then
         de_CP%Odm0      =  omegam - de_CP%Ob0hsq/de_CP%h**2.0
         de_CP%Ok0       = 0
 
-	de_CP%wz_binned%nbins = 1000
-	de_CP%wz_binned%whighz = -1.0
-	de_CP%wz_binned%zmax = 1.5
-	y = de_CP%wz_binned%zmax / dble(de_CP%wz_binned%nbins)
-	do i = 1, de_CP%wz_binned%nbins
-		z = (i-0.5) * y
-		de_CP%wz_binned%wzs(i) = de_CP%CPL%w0 + de_CP%CPL%wa* z / (1+z)
+
+	!!!! Very Strange!!!!! 
+	de_CP%w_binned%nbins = 100
+	de_CP%w_binned%whighz = -1.0
+	de_CP%w_binned%zmax = 1.5
+	de_CP%w_binned%binnedmethod  = de_abinned_type
+	amin = 1.0 / (1.0+de_CP%w_binned%zmax) ! amin
+	y = (1.0-amin) / dble(de_CP%w_binned%nbins)
+	do i = 1, de_CP%w_binned%nbins
+		!z = (i-0.5) * y
+		a = 1.0 - (i-0.5)*y
+		z = 1.0/a - 1.0
+		de_CP%w_binned%ws(i) = de_CP%CPL%w0 + de_CP%CPL%wa* z / (1.0+z)
+		print *, i, a, z, de_CP%w_binned%ws(i)
 	enddo
         
 	do i = 1, 10
@@ -72,13 +79,13 @@ if(.true.) then
 	        de_model_lab = de_CPL_lab
 	        call de_init()
 		y = de_inv_e(z)
-		do j = 1, 100000
+		do j = 1, 1
 			y = de_inv_e(z)
 		enddo
-	        de_model_lab = de_wz_binned_lab
+	        de_model_lab = de_w_binned_lab
 	        call de_init()
 		y2 = de_inv_e(z)
-		do j = 1, 100000
+		do j = 1, 1
 			y2 = de_inv_e(z)
 		enddo
 		print *, real(z), y, y2
