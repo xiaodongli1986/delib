@@ -43,9 +43,79 @@ if(.false.) then
 	stop
 endif
 
+! Test of de_coupled_de
+if(.true.) then
+
+	de_CP%Ob0hsq    =  0.02253
+	omegam 		= 0.264936E+00
+	de_CP%h		=  0.711833E+00
+	de_CP%alpha	=  0.142125E+01
+	de_CP%beta	=  0.325121E+01  
+	de_CP%Odm0 	=  omegam - de_CP%Ob0hsq/de_CP%h**2.0
+	de_CP%Ok0	= 0
+	de_CP%coupled_de%wde = -1.0
+	de_CP%coupled_de%xi1 = 0.0
+	de_CP%coupled_de%xi2 = 0.0
+
+	print *
+	print *,  'Lambda CDM'
+	de_model_lab = de_lcdm_lab
+	call de_init()
+	do i = 1, 10
+		z = i*0.2d0
+		print *, de_inv_e(z)
+	enddo
+
+
+	print *
+	print *,  'use xi1, set as 0'
+	de_model_lab = de_coupled_de_lab
+	de_CP%coupled_de%use_xi1 = .true.
+	call de_init()
+	do i = 1, 10
+		z = i*0.2d0
+		print *, de_inv_e(z)
+	enddo
+
+	print *	
+	print *,  'use xi2, set as 0'
+	de_model_lab = de_coupled_de_lab
+	de_CP%coupled_de%use_xi1 = .false.
+	call de_init()
+	do i = 1, 10
+		z = i*0.2d0
+		print *, de_inv_e(z)
+	enddo
+
+	print *
+	de_model_lab = de_coupled_de_lab
+	de_CP%coupled_de%use_xi1 = .true.
+	de_CP%coupled_de%xi1 = 0.1
+	print *,  'use xi2, set as ', de_CP%coupled_de%xi1
+	call de_init()
+	do i = 1, 10
+		z = i*0.2d0
+		print *, de_inv_e(z)
+	enddo
+
+	print *
+	de_model_lab = de_coupled_de_lab
+	de_CP%coupled_de%use_xi1 = .false.
+	de_CP%coupled_de%xi2 = 0.1
+	print *, 'use xi2, set as 0', de_CP%coupled_de%xi2
+	call de_init()
+	do i = 1, 10
+		z = i*0.2d0
+		print *, de_inv_e(z)
+	enddo
+
+
+endif
+
+
  !#############################################
 ! Test of de_w_binned
-if(.true.) then
+if(.false.) then
 
         de_CP%Ob0hsq    =  0.02253
         

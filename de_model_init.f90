@@ -46,6 +46,7 @@ IMPLICIT NONE
 	INTEGER, PARAMETER :: de_Rhct_lab = 9 ! H(z) = (1+z)^alpha H0
 	INTEGER, PARAMETER :: de_mauricehde_lab = 10 ! H(z) = (1+z)^alpha H0
 	INTEGER, PARAMETER :: de_w_binned_lab = 11 ! binned w within 0<z<zmax; at z>zmax have w = whigz
+	INTEGER, PARAMETER :: de_coupled_de_lab = 12 ! binned w within 0<z<zmax; at z>zmax have w = whigz
 	
 	INTEGER, PARAMETER :: de_inte_numbasebin = 256
 	
@@ -112,6 +113,8 @@ IMPLICIT NONE
 			CALL de_qz_init()
 		ELSEIF(de_model_lab .EQ. de_mauricehde_lab) then
 			CALL de_mauricehde_init()
+		ELSEIF(de_model_lab .EQ. de_coupled_de_lab) then
+			CONTINUE !CALL de_coupled_de_lab_init()
 		ELSE
 			WRITE(*,*) "Error! Initializaton of model ", de_model_lab, "not found!"
 			STOP
@@ -173,7 +176,7 @@ IMPLICIT NONE
   ! inv_e(z) = 1 / e(z)
   !------------------------------------------
 	DOUBLE PRECISION FUNCTION de_inv_e(z)    
-		DOUBLE PRECISION z
+		DOUBLE PRECISION z, f_dm, f_de, wde,xi1,xi2
 
 		IF(de_model_lab .EQ. de_lcdm_lab) THEN
 			de_inv_e = 1.0d0 / sqrt(de_CP%Om0*(1.0+z)**3.0  &
@@ -204,6 +207,22 @@ IMPLICIT NONE
 		ELSEIF(de_model_lab .EQ. de_srom_lab .OR. de_model_lab .EQ. de_ICG_lab .OR. de_model_lab .EQ. de_qz_lab &
 		       .OR. de_model_lab .EQ. de_mauricehde_lab) THEN
 			de_inv_e = de_intpl_inv_e(z)
+		ELSEIF(de_model_lab .EQ. de_coupled_de_lab) THEN
+			wde = de_CP%coupled_de%wde
+			xi1 = de_CP%coupled_de%xi1
+			xi2 = de_CP%coupled_de%xi2
+			if(.not.de_CP%coupled_de%use_xi1) then
+				f_de = (1.0+z)**(3.0*(1.0+wde+xi2)) + &
+					(1.0+z)**3.0 * xi2 * (1.0-(1.0+z)**(3.0*(xi2+wde))) / (xi2+wde)
+				f_dm = (1.0+z)**3.0
+			else
+				f_de = (1.0+z)**(3.0*(1.0+wde))
+				f_dm = (1.0+z)**(3.0*(1.0+wde))*xi1/(xi1+wde) - xi1/(xi1+wde)*(1.0+z)**(3.0*(1-xi1)) &
+					+ (1.0+z)**(3.0*(1-xi1))
+			endif
+			de_inv_e = de_CP%Odm0 * f_dm + de_CP%Ode0 * f_de &
+				+ de_CP%Ok0*(1.0+z)**2.0 + de_CP%Or0*(1.0+z)**4.0 + de_CP%Ob0*(1.0+z)**3.0
+			de_inv_e = 1.0/sqrt(de_inv_e)
 		ELSE
 			WRITE(*,*) "Error! inv_e(z) of model ", de_model_lab, "not found!"
 			STOP
@@ -232,7 +251,7 @@ IMPLICIT NONE
 		ELSEIF(de_model_lab .EQ. de_w_binned_lab) THEN
 			de_rhode = de_get_rhodez(z)
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab &
-			.or. de_model_lab .EQ. de_mauricehde_lab) then
+			.or. de_model_lab .EQ. de_mauricehde_lab .or. de_model_lab .EQ. de_coupled_de_lab) then
 			print *, 'ERROR! No rhode(z) available for q(z), Rhct model!'
 			stop
 		ELSE	
@@ -282,7 +301,7 @@ IMPLICIT NONE
 				endif
 			endif
 		ELSEIF(de_model_lab .EQ. de_qz_lab .or. de_model_lab .EQ. de_Rhct_lab .or.  &
-			de_model_lab .EQ. de_mauricehde_lab) then
+			de_model_lab .EQ. de_mauricehde_lab .or. de_model_lab .EQ. de_coupled_de_lab) then
 			print *, 'ERROR! No w(z) available for q(z), Rhct model!'
 			stop
 		ELSE

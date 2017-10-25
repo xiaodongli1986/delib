@@ -347,9 +347,11 @@ IMPLICIT NONE
 				- 2.0d0 * beta * sndata(I)%cov_mag_colour &
 				- 2.0d0 * alphabeta * sndata(I)%cov_stretch_colour
 		ENDDO
-	
-		CALL DPOTRF(uplo,nsnls3,invcovmat,nsnls3,STATUS)
-		CALL DPOTRI(uplo,nsnls3,invcovmat,nsnls3,STATUS)
+		
+		print *, 'EXIT!'; stop
+		!CALL DPOTRF(uplo,nsnls3,invcovmat,nsnls3,STATUS)
+		print *, 'EXIT!'; stop
+		!CALL DPOTRI(uplo,nsnls3,invcovmat,nsnls3,STATUS)
 	
 		first_inversion = .FALSE.
 		alpha_prev = alpha
@@ -404,19 +406,22 @@ IMPLICIT NONE
 !		We re-use the invvars variable to hold the intermediate product
 !		which is sort of naughty
 !		invvars = V^-1 * dIFfmag (invvars = 1.0*invcovmat*dIFfmag+0*invvars)
-		CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,diffmag,1,0.0d0,invvars,1)
+		print *, 'EXIT!'; stop
+		!CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,diffmag,1,0.0d0,invvars,1)
 
 		amarg_A = DOT_PRODUCT( diffmag, invvars ) ! dIFfmag*V^-1*dIFfmag
 		amarg_B = DOT_PRODUCT( invvars, A1 ) !dIFfmag*V^-1*A1
 		amarg_C = DOT_PRODUCT( invvars, A2 ) !dIFfmag*V^-1*A2
 
 !		Be naughty again and stick V^-1 * A1 in invvars
-		CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,A1,1,0.0d0,invvars,1)
+		print *, 'EXIT!'; stop
+		!CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,A1,1,0.0d0,invvars,1)
 		amarg_D = DOT_PRODUCT( invvars, A2 ) !A2*V^-1*A1
 		amarg_E = DOT_PRODUCT( invvars, A1 ) !A1*V^-1*A1
 
 !		now V^-1 * A2
-		CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,A2,1,0.0d0,invvars,1)
+				print *, 'EXIT!'; stop
+		!CALL DSYMV(uplo,nsnls3,1.0d0,invcovmat,nsnls3,A2,1,0.0d0,invvars,1)
 		amarg_F = DOT_PRODUCT( invvars, A2 ) !A2*V^-1*A2
 		tempG = amarg_F - amarg_D*amarg_D/amarg_E; !g/e
 

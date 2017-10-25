@@ -52,6 +52,11 @@ IMPLICIT NONE
 	TYPE :: Rhct_para
 		DOUBLE PRECISION :: alpha
 	END TYPE
+	
+	TYPE :: coupled_de_para
+		LOGICAL :: use_xi1 
+		DOUBLE PRECISION :: wde, xi1,xi2
+	END TYPE
 
 
 	TYPE :: de_para
@@ -82,6 +87,7 @@ IMPLICIT NONE
 		TYPE(Rhct_para) :: Rhct
 		
 		TYPE(w_binned_para) :: w_binned
+		TYPE(coupled_de_para) :: coupled_de
 
 
 		!derived parameters
