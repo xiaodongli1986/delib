@@ -100,6 +100,7 @@ IMPLICIT NONE
 		DOUBLE PRECISION :: zd, rszd
 		DOUBLE PRECISION :: zstar, DAzstar, rszstar
 		DOUBLE PRECISION :: R, lA
+		DOUBLE PRECISION :: ns
 	END TYPE de_para
 	
 	!Global colleection of parameters

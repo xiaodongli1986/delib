@@ -372,4 +372,39 @@ CONTAINS
 		CLOSE(4321)
 	END SUBROUTINE de_read_in
 
+  !---------------------------------------------------------------
+  ! inversion of a matrix
+  !---------------------------------------------------------------      
+        subroutine de_nizhen(aa,b,n)
+                ! Dummy
+                double precision, intent(in) :: aa(n,n)
+                integer, intent(in) :: n
+                double precision, intent(out) :: b(n,n)
+                ! Local
+                integer :: i,j,k
+                double precision :: a(n,n)
+                a=aa
+                b=0.0d0
+                do i=1,n
+                        b(i,i)=1
+                enddo
+                do i=1,n
+                        b(i,:)=b(i,:)/a(i,i)
+                        a(i,i:n)=a(i,i:n)/a(i,i)
+                        do j=i+1,n
+                                do k=1,n
+                                        b(j,k)=b(j,k)-b(i,k)*a(j,i)
+                                enddo
+                                a(j,i:n)=a(j,i:n)-a(i,i:n)*a(j,i)
+                        enddo
+                enddo
+                do i=n,1,-1
+                do j=i-1,1,-1
+                do k=1,n
+                        b(j,k)=b(j,k)-b(i,k)*a(j,i)
+                enddo
+                enddo
+                enddo
+        end subroutine de_nizhen
+
 END MODULE de_tools

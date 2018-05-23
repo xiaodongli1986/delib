@@ -1,4 +1,5 @@
 
+#DElibPATH=/home/xue/workspace/delib
 DElibPATH=/home/xiaodongli/software/delib
 
 # libarary

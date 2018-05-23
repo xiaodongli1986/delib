@@ -14,6 +14,7 @@ IMPLICIT NONE
 	DOUBLE PRECISION,   PARAMETER  ::  de_inv_twoPI = 1.0d0 / ( 2.0d0 * 3.1415926535897932384626433832795d0 ) 
 
 !PATH 
+	!CHARACTER(len=de_char_len), PARAMETER :: de_data_path = '/home/xue/workspace/delib/data/'
 	CHARACTER(len=de_char_len), PARAMETER :: de_data_path = '/home/xiaodongli/software/delib/data/'
 
 ! print chisq

@@ -1,0 +1,10 @@
+#This is the Tomographic BAO data set  
+name = DR12_tomoBAO_Zhao
+
+measurement_type = DA_over_rs DA_over_rs DA_over_rs DA_over_rs DA_over_rs DA_over_rs DA_over_rs DA_over_rs DA_over_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs bao_Hz_rs 
+
+#number of bao data points 
+num_bao = 18
+
+bao_measurements_file = DR12_tomoBAO_Zhao_measurement.txt
+bao_invcov_file = DR12_tomoBAO_Zhao_invcov.txt
